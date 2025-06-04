@@ -1,7 +1,5 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
-# Controls when the workflow will run
+
 on:
   push:
     branches:
@@ -9,15 +7,18 @@ on:
   pull_request:
     branches:
       - main
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    -name: "Read OS version"
-    run: sudo cat /etc/os-release
-    -name: "Read System Config"
-    run: sudo lsmem | head -10 && sudo lscpu | -20
-    -name: " Hosted on ??"
-    run: sudo dmidecode -t system
+    steps:
+      - name: Read OS version
+        run: cat /etc/os-release
+
+      - name: Read System Config
+        run: |
+          lsmem | head -10
+          lscpu | head -20
+
+      - name: Hosted on ??
+        run: sudo dmidecode -t system
